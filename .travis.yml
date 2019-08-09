@@ -5,4 +5,4 @@ before_install:
   - docker build . --target devenv -t peste_dev
 
 script:
-  - docker run peste_dev /bin/sh mix test
+  - docker run peste_dev mix test
