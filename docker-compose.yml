@@ -1,0 +1,14 @@
+version: "3.4"
+services:
+  peste_api:
+    build:
+      context: .
+      target: devenv
+    ports:
+      - "4444:4000"
+    dns:
+      - 1.1.1.1
+    command: /bin/sh -c "mix deps.get && mix phx.server"
+    volumes:
+      - ./peste_api:/app/peste_api
+
