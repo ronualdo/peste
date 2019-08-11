@@ -2,7 +2,8 @@ services: docker
   - docker
 
 before_install:
-  - docker build . --target devenv -t peste_dev
+  - docker build . --target detenv -t peste:${TRAVIS_COMMIT}
 
 script:
-  - docker run peste_dev mix test
+  - docker run peste:${TRAVIS_COMMIT} mix test
+  - docker push ronualdo/peste:${TRAVIS_COMMIT}
