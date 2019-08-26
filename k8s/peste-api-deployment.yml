@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: peste-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: peste-api
+  template:
+    metadata:
+      labels:
+        app: peste-api
+    spec:
+      containers:
+      - name: peste-api
+        image: ronualdo/peste:31497bc7b1290c4e2590e4044f67f86f7a5487ce
+        ports:
+          - containerPort: 4000
+        env:
+          - name: SECRET_KEY_BASE
+            value: 6zlSqkXv5e+Obtc8kqnxPIw2nF766UD3MNje1eQEqisLCVVKtDNpZmsStdBDF47K
+

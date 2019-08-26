@@ -7,5 +7,7 @@ defmodule PesteApiWeb.Router do
 
   scope "/api", PesteApiWeb do
     pipe_through :api
+
+    get "/ping", PingController, :ping
   end
 end
