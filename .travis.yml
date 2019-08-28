@@ -3,8 +3,9 @@ services: docker
 
 before_install:
   - echo ${DOCKER_PASSWORD} | docker login -u $DOCKER_USERNAME --password-stdin
-  - docker build . --target devenv -t ronualdo/peste:${TRAVIS_COMMIT}
+  - docker build . --target devenv -t ci-env
 
 script:
-  - docker run ronualdo/peste:${TRAVIS_COMMIT} mix test
+  - docker run ci-env mix test
+  - docker build . -t ronualdo/peste:${TRAVIS_COMMIT}
   - docker push ronualdo/peste:${TRAVIS_COMMIT}
