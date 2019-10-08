@@ -9,5 +9,6 @@ defmodule PesteApiWeb.Router do
     pipe_through :api
 
     get "/ping", PingController, :ping
+    post "/update", PingController, :update
   end
 end
