@@ -1,9 +1,9 @@
 FROM ronualdo/phoenix-api:v1.4.8 as devenv
 
-RUN mkdir -p /app/peste_api
-COPY ./peste_api /app/peste_api
-WORKDIR /app/peste_api
+RUN mkdir -p /app
+COPY ./apps/ /app/
 
+WORKDIR /app/peste_api
 RUN mix deps.get &&\
   MIX_ENV=prod mix release --overwrite
 
