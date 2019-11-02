@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: peste-api
-        image: ronualdo/peste:31497bc7b1290c4e2590e4044f67f86f7a5487ce
+        image: ronualdo/peste:1a920218492f7e50cf880fb3a9f25f87bb4078f0
         ports:
           - containerPort: 4000
         env:
