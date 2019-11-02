@@ -10,7 +10,7 @@ defmodule TelegramBotClient.MethodsTest do
   describe "answer_inline_query/4" do
     test "returns ok when api call is processed with success" do
       ApiMock
-      |> expect(:post, fn token, url, parameters -> {:ok, %{}} end)
+      |> expect(:post, fn _token, _url, _parameters -> {:ok, %{}} end)
 
       assert Methods.answer_inline_query("token", "1", [], using: ApiMock) == :ok
     end
