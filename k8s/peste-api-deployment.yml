@@ -22,11 +22,11 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: peste-secrets
-                value: secret-key-base
+                key: secret-key-base
           - name: PESTE_BOT_TOKEN
             valueFrom:
               secretKeyRef:
                 name: peste-secrets
-                value: peste-bot-token
+                key: peste-bot-token
 
 
