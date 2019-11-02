@@ -1,18 +1,14 @@
 defmodule TelegramBotClient do
-  @moduledoc """
-  Documentation for TelegramBotClient.
-  """
+  alias TelegramBotClient.{TelegramApi, Types}
 
-  @doc """
-  Hello world.
+  defdelegate input_text_message_content(text_message), to: Types
 
-  ## Examples
+  defdelegate inline_query_result_article(id, title, message_content), to: Types
 
-      iex> TelegramBotClient.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def answer_inline_query(token, inline_query_id, inline_query_result) do
+    TelegramApi.post(token, "answerInlineQuery", %{
+      inline_query_id: inline_query_id,
+      results: inline_query_result
+    })
   end
 end

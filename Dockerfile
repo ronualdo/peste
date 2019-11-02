@@ -1,9 +1,9 @@
 FROM ronualdo/phoenix-api:v1.4.8 as devenv
 
-RUN mkdir -p /app
-COPY ./apps/ /app/
+RUN mkdir -p /apps
+COPY ./apps/ /apps/
 
-WORKDIR /app/peste_api
+WORKDIR /apps/peste_api
 RUN mix deps.get &&\
   MIX_ENV=prod mix release --overwrite
 
@@ -14,8 +14,8 @@ EXPOSE 4000/tcp
 
 RUN apk add --update openssl bash libstdc++
 
-WORKDIR /app/peste_api
+WORKDIR /app/peste
 
-COPY --from=devenv /app/peste_api/_build/prod/rel/peste_api/ /app/peste_api/
+COPY --from=devenv /apps/peste_api/_build/prod/rel/peste_api/ /app/peste/
 
-CMD /app/peste_api/bin/peste_api start
+CMD /app/peste/bin/peste_api start
