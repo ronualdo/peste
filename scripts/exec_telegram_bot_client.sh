@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker-compose exec -w "/app/telegram_bot_client" peste_api "$@"
+docker-compose exec -w "/apps/telegram_bot_client" peste_api "$@"
