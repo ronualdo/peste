@@ -19,5 +19,14 @@ spec:
           - containerPort: 4000
         env:
           - name: SECRET_KEY_BASE
-            value: 6zlSqkXv5e+Obtc8kqnxPIw2nF766UD3MNje1eQEqisLCVVKtDNpZmsStdBDF47K
+            valueFrom:
+              secretKeyRef:
+                name: peste-secrets
+                value: secret-key-base
+          - name: PESTE_BOT_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: peste-secrets
+                value: peste-bot-token
+
 
