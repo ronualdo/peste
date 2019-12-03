@@ -7,7 +7,7 @@ services:
     ports:
       - "4444:4000"
     dns:
-      - 1.1.1.1
+      - 8.8.8.8
     environment:
       TEST_CHAT_ID: ${TEST_CHAT_ID}
       TEST_TOKEN: ${TEST_TOKEN}

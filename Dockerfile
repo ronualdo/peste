@@ -1,5 +1,7 @@
 FROM ronualdo/phoenix-api:v1.4.8 as devenv
 
+RUN apk add inotify-tools
+
 RUN mkdir -p /apps
 COPY ./apps/ /apps/
 

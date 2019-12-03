@@ -15,7 +15,9 @@ defmodule TelegramBotClient.TelegramApiTest do
     test "returns success when request is processed", %{chat_id: chat_id, test_token: test_token} do
       parameters = %{chat_id: chat_id, text: "test message"}
 
-      result = TelegramApi.post(test_token, "sendMessage", parameters)
+      result =
+        TelegramApi.client("https://api.telegram.org", test_token)
+        |> TelegramApi.post("sendMessage", parameters)
 
       assert {:ok,
               %{
@@ -39,7 +41,9 @@ defmodule TelegramBotClient.TelegramApiTest do
     test "returns error when request fails", %{chat_id: chat_id, invalid_token: invalid_token} do
       parameters = %{chat_id: chat_id, text: "test message"}
 
-      result = TelegramApi.post(invalid_token, "sendMessage", parameters)
+      result =
+        TelegramApi.client("https://api.telegram.org", invalid_token)
+        |> TelegramApi.post("sendMessage", parameters)
 
       assert {:error, "Not Found"} = result
     end
