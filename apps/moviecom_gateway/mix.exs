@@ -1,9 +1,9 @@
-defmodule Peste.MixProject do
+defmodule MoviecomGateway.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :peste,
+      app: :moviecom_gateway,
       version: "0.1.0",
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
@@ -14,6 +14,7 @@ defmodule Peste.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
+      applications: [:timex],
       extra_applications: [:logger]
     ]
   end
@@ -22,7 +23,8 @@ defmodule Peste.MixProject do
   defp deps do
     [
       {:timex, "~> 3.5"},
-      {:moviecom_gateway, path: "../moviecom_gateway"}
+      {:tesla, "~> 1.2.0"},
+      {:jason, ">= 1.0.0"}
     ]
   end
 end

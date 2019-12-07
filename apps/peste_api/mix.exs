@@ -37,7 +37,8 @@ defmodule PesteApi.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:telegram_bot_client, path: "../telegram_bot_client"}
+      {:telegram_bot_client, path: "../telegram_bot_client"},
+      {:peste, path: "../peste"}
     ]
   end
 end
