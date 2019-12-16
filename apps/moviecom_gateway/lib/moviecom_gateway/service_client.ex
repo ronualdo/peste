@@ -19,13 +19,14 @@ defmodule MoviecomGateway.ServiceClient do
   defp client() do
     [
       {Tesla.Middleware.BaseUrl,
-       "https://www.veloxtickets.com/Parceiro/P-Moviecom/AjaxService/LocalDetail"}
+       "https://www.veloxtickets.com/Parceiro/P-Moviecom/AjaxService/LocalDetail"},
+      Tesla.Middleware.JSON
     ]
   end
 
   defp wrap_result({:ok, %Env{status: status, body: body}})
        when status == 200 do
-    {:ok, Jason.decode!(Jason.decode!(body))}
+    {:ok, Jason.decode!(body)}
   end
 
   defp wrap_result({:ok, %Env{body: %{"description" => description}}}) do

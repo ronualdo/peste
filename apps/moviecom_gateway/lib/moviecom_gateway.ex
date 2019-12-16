@@ -15,7 +15,7 @@ defmodule MoviecomGateway do
 
   defp parse_movie_schedule({:error, _reason} = error), do: error
 
-  defp wrap_result(movie_schedule), do: {:ok, movie_schedule}
-
   defp wrap_result({:error, _reason} = error), do: error
+
+  defp wrap_result(movie_schedule), do: {:ok, movie_schedule}
 end
