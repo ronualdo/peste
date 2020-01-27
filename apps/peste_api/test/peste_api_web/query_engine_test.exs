@@ -2,15 +2,6 @@ defmodule PesteApiWeb.QueryEngineTest do
   use ExUnit.Case, async: true
 
   alias PesteApiWeb.QueryEngine
-  alias PesteApiWeb.QueryEngine.Query
-
-  describe "build_query/1" do
-    test "builds a query with input provided" do
-      cinema_query = QueryEngine.build_query("cinema")
-
-      assert cinema_query == %Query{input: "cinema", result: nil}
-    end
-  end
 
   describe "run/1" do
     test "returns cinema query result" do
