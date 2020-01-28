@@ -8,6 +8,6 @@ defmodule PesteApiWeb.Router do
   scope "/v1", PesteApiWeb do
     pipe_through :api
 
-    post "/webhook", TelegramControlle, :webhook
+    post "/webhook", TelegramController, :webhook
   end
 end

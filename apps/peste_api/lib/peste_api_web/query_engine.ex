@@ -1,8 +1,4 @@
 defmodule PesteApiWeb.QueryEngine do
-  alias PesteApiWeb.QueryEngine.Query
-
-  def build_query("cinema" = input), do: %Query{input: input}
-
   def run(_query, _query_answers_mapping \\ %{})
 
   def run("cinema", query_answers_mapping) do

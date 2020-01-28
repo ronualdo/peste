@@ -11,6 +11,7 @@ secret_key_base =
     environment variable SECRET_KEY_BASE is missing.
     You can generate one by calling: mix phx.gen.secret
     """
+config :peste_api, peste_bot_token: System.get_env("PESTE_BOT_TOKEN")
 
 config :peste_api, PesteApiWeb.Endpoint,
   http: [:inet6, port: String.to_integer(System.get_env("PORT") || "4000")],
