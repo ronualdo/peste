@@ -6,5 +6,7 @@ config :peste_api, PesteApiWeb.Endpoint,
   http: [port: 4002],
   server: false
 
+config :peste_api, telegram_base_url: "http://localhost:9012"
+
 # Print only warnings and errors during test
 config :logger, level: :warn

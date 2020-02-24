@@ -38,8 +38,9 @@ defmodule PesteApi.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:tzdata, "~> 1.0.1"},
+      {:bypass, "~> 1.0", only: :test},
       {:peste, path: "../peste"},
-      {:telegram_bot_client, path: "../telegram_bot_client"}
+      {:telegram_bot_client, path: "../telegram_bot_client"},
     ]
   end
 end

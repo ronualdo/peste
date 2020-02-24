@@ -1,15 +1,12 @@
 defmodule TelegramBotClient.Methods do
   alias TelegramBotClient.UrlParser
 
-  @http_gateway_config HttpGateway.config(
-                         base_url: "https://api.telegram.org",
-                         enable_json_parse: true
-                       )
+  @http_gateway_base_config %{enable_json_parse: true}
 
-  def answer_inline_query(token, inline_query_id, results) do
+  def answer_inline_query(token, inline_query_id, results, base_url \\ "https://api.telegram.org") do
     token
     |> build_url("answerInlineQuery")
-    |> post_request(%{
+    |> post_request(base_url, %{
       inline_query_id: inline_query_id,
       results: results
     })
@@ -19,7 +16,10 @@ defmodule TelegramBotClient.Methods do
     "bot#{token}/#{action}"
   end
 
-  def post_request(resource, parameters) do
-    HttpGateway.post(@http_gateway_config, resource, parameters)
+  defp post_request(resource, base_url, parameters) do
+    @http_gateway_base_config
+    |> Map.put(:base_url, base_url)
+    |> HttpGateway.config()
+    |> HttpGateway.post(resource, parameters)
   end
 end

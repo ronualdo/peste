@@ -1,46 +1,46 @@
 defmodule PesteApiWeb.TelegramController do
   use PesteApiWeb, :controller
 
-  alias PesteApiWeb.{QueryEngine, TelegramMessages}
+  alias PesteApiWeb.InlineQuery
 
-  def webhook(conn, %{"inline_query" => %{"id" => id, "query" => query}}) do
-    query
-    |> QueryEngine.run(my_mapping())
-    |> render_results(id)
-    |> return_response(conn)
+  def webhook(conn, %{"inline_query" => query}) do
+    case process_query(query) do
+      {:ok, _response} ->
+        conn
+        |> json(%{success: true})
+
+      {:error, error} ->
+        conn
+        |> put_status(500)
+        |> json(%{success: false, error: error})
+    end
   end
 
-  def webhook(conn, params) do
-    conn
-    |> json(%{success: true})
+  defp process_query(%{"id" => id, "query" => "cinema"}) do
+    InlineQuery.queries()
+    |> InlineQuery.filter_query(:movies)
+    |> Enum.map(&build_movies_result/1)
+    |> send_results(id)
   end
 
-  defp render_results(results, inline_query_id) do
-    my_answer = 
-      results
-      |> Enum.map(&parse_to_bot_client/1)
+  defp process_query(_), do: {:ok, %{}}
 
-
-    TelegramBotClient.answer_inline_query(peste_bot_token(), inline_query_id, my_answer)
+  defp build_movies_result({id, %{title: title, result_fn: result_fn}}) do
+    result_fn.()
+    |> TelegramBotClient.input_text_message_content()
+    |> TelegramBotClient.inline_query_result_article(id, title)
   end
 
-  defp parse_to_bot_client(query_result) do
-    input_message_content = 
-      query_result.answer
-      |> TelegramBotClient.input_text_message_content()
-
-    TelegramBotClient.inline_query_result_article(query_result.id, query_result.title, input_message_content)
-  end
-
-  defp return_response(success, conn) do
-    json(conn, %{success: true})
+  defp send_results(results, query_id) do
+    peste_bot_token()
+    |> TelegramBotClient.answer_inline_query(query_id, results, telegram_base_url())
   end
 
   defp peste_bot_token do
     Application.fetch_env!(:peste_api, :peste_bot_token)
   end
 
-  defp my_mapping do
-    %{movies: &TelegramMessages.movies_message/0}
+  defp telegram_base_url do
+    Application.fetch_env!(:peste_api, :telegram_base_url)
   end
 end

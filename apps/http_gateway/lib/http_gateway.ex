@@ -11,12 +11,9 @@ defmodule HttpGateway do
   end
 
   def post(%Config{middlewares: middlewares, http_adapter: http_adapter}, url, params) do
-    IO.inspect(params)
-
     middlewares
     |> Tesla.client(http_adapter)
     |> Tesla.post(url, params)
-    |> IO.inspect()
     |> wrap_result()
   end
 

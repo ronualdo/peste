@@ -24,7 +24,8 @@ config :phoenix, :json_library, Jason
 
 config :elixir, :time_zone_database, Tzdata.TimeZoneDatabase
 
-config :peste_api, peste_bot_token: System.get_env("PESTE_BOT_TOKEN")
+config :peste_api, peste_bot_token: System.get_env("PESTE_BOT_TOKEN"),
+                   telegram_base_url: "https://api.telegram.org"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
