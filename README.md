@@ -16,7 +16,7 @@ To try that in production just type `@OhPesteBot cinema` in a Telegram Client.
 ## Running Tests
 
 ```
-docker-compose mix test
+docker-compose run peste_api mix test
 ```
 
 ## Running Project Locally
