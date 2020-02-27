@@ -10,7 +10,8 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :peste_api, PesteApiWeb.Endpoint,
-  url: [host: "https://peste.notdev.eti.br", port: 4000]
+  url: [host: "https://peste.notdev.eti.br", port: 80],
+  server: true
 
 # Do not print debug messages in production
 config :logger, level: :info
